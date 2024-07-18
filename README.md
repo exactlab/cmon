@@ -25,3 +25,11 @@ options:
 ```
 
 ## Plotting
+
+Experimental plotting based on Dash. Run 
+
+```python contmon/_plot.py [input.hdf5]```
+
+and the (interactive) plots should show up in `http://localhost:8050`.
+
+
