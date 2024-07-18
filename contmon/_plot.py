@@ -63,10 +63,3 @@ class App:
 
     def run(self, **kwargs):
         self.app.run(**kwargs)
-
-
-if __name__ == "__main__":
-
-    with h5py.File(argv[1], "r") as data:
-        app = App(data)
-        app.run(debug=True)

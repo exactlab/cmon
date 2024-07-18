@@ -72,9 +72,10 @@ class ProcessMonitor:
 
 
 class Monitor:
-    def __init__(self, process_map):
+    def __init__(self, process_map, buffer_size=1024):
         self.processes = [
-            ProcessMonitor(k, v) for k, v in process_map.items()
+            ProcessMonitor(k, v, buffer_size=buffer_size)
+            for k, v in process_map.items()
         ]
 
     def poll(self):
