@@ -10,6 +10,7 @@ python = "^3.12"
 docker = "^7.1.0"
 psutil = "^6.0.0"
 h5py = "^3.11.0"
+dash = "^2.17.1"
 
 
 [tool.poetry.group.dev.dependencies]
