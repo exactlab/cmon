@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "contmon"
+version = "0.1.0"
+description = ""
+authors = ["Jacopo Nespolo <jacopo@exact-lab.it>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+docker = "^7.1.0"
+psutil = "^6.0.0"
+h5py = "^3.11.0"
+
+
+[tool.poetry.group.dev.dependencies]
+devtools = "^0.12.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

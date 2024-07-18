@@ -1,0 +1,8 @@
+services:
+  whoami:
+    image: "traefik/whoami"
+    deploy:
+      replicas: 2
+
+  whoareyou:
+    image: "traefik/whoami"
