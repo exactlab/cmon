@@ -1,14 +1,14 @@
 from psutil import Process
 import numpy as np
 from time import perf_counter_ns
-from pathlib import Path
 import h5py
 
 
 class ProcessMonitor:
-    def __init__(self, display_name, pid):
+    def __init__(self, display_name, pid, buffer_size=1024):
         self.display_name = display_name
         self.proc = Process(pid)
+        self.buffer_size = buffer_size
 
         self.idx = 0
         self.buffers = []
@@ -25,8 +25,8 @@ class ProcessMonitor:
             "ctx_invol",
         ]
 
-    def get_buffer(self, buf_size=1024):
-        buf = np.zeros((buf_size, 10))
+    def get_buffer(self):
+        buf = np.zeros((self.buffer_size, 10))
         self.buffers.append(buf)
 
     def poll(self):
@@ -81,8 +81,7 @@ class Monitor:
         for p in self.processes:
             p.poll()
 
-    def save(self, dest=Path(".")):
-        destination = dest / "foo.hdf5"
-        with h5py.File(destination, "w") as f:
+    def save(self, dest):
+        with h5py.File(dest, "w") as f:
             for p in self.processes:
                 p.save(f)
