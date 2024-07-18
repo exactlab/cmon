@@ -1,7 +1,7 @@
 from docker import DockerClient
 
 class ComposeContainers:
-    def __init__(self, *, compose_project: str | None = None):
+    def __init__(self, *, compose_project=None):
         self.client = DockerClient()
         self.compose_project = compose_project
 

@@ -71,5 +71,5 @@ if __name__ == "__main__":
 
         with h5py.File(args.input_file, "r") as data:
             app = App(data)
-            app.run(debug=True)
+            app.run(debug=True, host="0.0.0.0")
         exit(0)
