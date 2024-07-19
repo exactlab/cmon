@@ -20,6 +20,13 @@ class App:
                 ),
             ),
             dcc.Graph(
+                id="graph_iowait",
+                figure=dict(
+                    data=self._cpu_usage("time_iowait"),
+                    layout=dict(title="IO wait CPU"),
+                ),
+            ),
+            dcc.Graph(
                 id="graph_mem_res",
                 figure=dict(
                     data=self._metric("mem_rss"),
