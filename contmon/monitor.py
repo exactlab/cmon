@@ -16,7 +16,7 @@ class ProcessMonitor:
             "timestamp_ns",
             "time_user",
             "time_system",
-            "times_iowait",
+            "time_iowait",
             "num_threads",
             "mem_rss",
             "mem_vms",
