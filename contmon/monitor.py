@@ -77,10 +77,11 @@ class Monitor:
             ProcessMonitor(display_name=name, pid=pid, buffer_size=buffer_size)
             for name, pid in process_map.items()
         ]
-        self.processes.extend(
-            ProcessMonitor(pid=int(pid), buffer_size=buffer_size)
-            for pid in pids
-        )
+        if pids is not None:
+            self.processes.extend(
+                ProcessMonitor(pid=int(pid), buffer_size=buffer_size)
+                for pid in pids
+            )
 
     def poll(self):
         for p in self.processes:
