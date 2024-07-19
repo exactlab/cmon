@@ -25,6 +25,15 @@ parser_monitor.add_argument(
     "-c", "--compose", help="If provided, filter by Docker Compose project"
 )
 parser_monitor.add_argument(
+    "--no-docker",
+    default=False,
+    action="store_true",
+    help="Do not search for Docker containers.",
+)
+parser_monitor.add_argument(
+    "--pids", nargs="+", help="Process IDs to include in the analysis"
+)
+parser_monitor.add_argument(
     "-p",
     "--period",
     type=float,
@@ -49,8 +58,12 @@ if __name__ == "__main__":
         args.cmd = "monitor"
 
     if args.cmd == "monitor":
-        cc = ComposeContainers(compose_project=args.compose)
-        mon = Monitor(cc.process_map, buffer_size=args.buffer)
+        process_map = {}
+        if not args.no_docker:
+            cc = ComposeContainers(compose_project=args.compose)
+            process_map.update(cc.process_map)
+
+        mon = Monitor(process_map, pids=args.pids, buffer_size=args.buffer)
         while True:
             try:
                 mon.poll()

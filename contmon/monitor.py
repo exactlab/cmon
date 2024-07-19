@@ -5,9 +5,9 @@ import h5py
 
 
 class ProcessMonitor:
-    def __init__(self, display_name, pid, buffer_size=1024):
-        self.display_name = display_name
+    def __init__(self, *, pid, display_name=None, buffer_size=1024):
         self.proc = Process(pid)
+        self.display_name = display_name or self.proc.name()
         self.buffer_size = buffer_size
 
         self.idx = 0
@@ -26,7 +26,7 @@ class ProcessMonitor:
         ]
 
     def get_buffer(self):
-        buf = np.zeros((self.buffer_size, 10))
+        buf = np.zeros((self.buffer_size, 10), dtype=float)
         self.buffers.append(buf)
 
     def poll(self):
@@ -72,11 +72,15 @@ class ProcessMonitor:
 
 
 class Monitor:
-    def __init__(self, process_map, buffer_size=1024):
+    def __init__(self, process_map, pids=None, buffer_size=1024):
         self.processes = [
-            ProcessMonitor(k, v, buffer_size=buffer_size)
-            for k, v in process_map.items()
+            ProcessMonitor(display_name=name, pid=pid, buffer_size=buffer_size)
+            for name, pid in process_map.items()
         ]
+        self.processes.extend(
+            ProcessMonitor(pid=int(pid), buffer_size=buffer_size)
+            for pid in pids
+        )
 
     def poll(self):
         for p in self.processes:
