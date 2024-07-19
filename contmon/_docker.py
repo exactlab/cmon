@@ -1,4 +1,5 @@
 from docker import DockerClient
+from psutil import Process
 
 class ComposeContainers:
     def __init__(self, *, compose_project=None):
@@ -18,4 +19,12 @@ class ComposeContainers:
 
     def _get_pids(self):
         for c in self.containers:
-            c.pid = c.attrs["State"]["Pid"]
+            # NOTE (jacopo): For reasons I don't know, if the root process is a
+            # shell, the metrics of the root process *do not* include the
+            # children. In this case we take the first (and usually only) 
+            # child.
+            root_process = Process(c.attrs["State"]["Pid"])
+            if root_process.name() == "sh":
+                c.pid = root_process.children()[0].pid
+            else:
+                c.pid = root_process.pid
