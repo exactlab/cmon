@@ -1,6 +1,4 @@
 from dash import Dash, dcc
-import h5py
-from sys import argv
 
 class App:
     def __init__(self, hdf5_fp):
