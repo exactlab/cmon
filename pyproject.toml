@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Jacopo Nespolo <jacopo@exact-lab.it>"]
 readme = "README.md"
+license = "GNU GPLv3"
 
 [tool.poetry.dependencies]
 python = "^3.10"
