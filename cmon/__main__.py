@@ -1,5 +1,5 @@
 from ._docker import ComposeContainers
-from .monitor import Monitor
+from ._monitor import Monitor
 from time import sleep
 from argparse import ArgumentParser
 from pathlib import Path
@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 parser = ArgumentParser(
-    prog="contmon",
+    prog="cmon",
     description="""The container monitor
 
 Collect metrics on CPU, memory, context switches and number of threads 

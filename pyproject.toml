@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "contmon"
+name = "cmon"
 version = "0.1.0"
 description = ""
 authors = ["Jacopo Nespolo <jacopo@exact-lab.it>"]
@@ -22,4 +22,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 80
-

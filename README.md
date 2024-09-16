@@ -1,14 +1,14 @@
-# `contmon` - The container monitor
+# `cmon` - The container monitor
 
-`contmon` collects metrics on running containers and saves them to an HDF5
+`cmon` collects metrics on running containers and saves them to an HDF5
 file.
 
 ## Collection
 
 ```
-python -m contmon -h
+python -m cmon -h
 
-usage: contmon monitor [-h] [-c COMPOSE] [-p PERIOD] [-o OUTPUT]
+usage: cmon monitor [-h] [-c COMPOSE] [-p PERIOD] [-o OUTPUT]
                        [--buffer BUFFER]
 
 options:
@@ -27,7 +27,7 @@ options:
 Experimental plotting based on Dash.
 
 ```
-usage: contmon plot [-h] input_file
+usage: cmon plot [-h] input_file
 
 positional arguments:
   input_file  Path to HDF5 input file
@@ -37,5 +37,3 @@ options:
 ```
 
 The (interactive) plots should show up in `http://localhost:8050`.
-
-
