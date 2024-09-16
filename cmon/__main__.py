@@ -57,8 +57,8 @@ parser_monitor.add_argument(
 )
 
 
-if __name__ == "__main__":
-    args, extra = parser.parse_known_args()
+def main():
+    args, _ = parser.parse_known_args()
     if args.cmd is None:
         args = parser_monitor.parse_args()
         args.cmd = "monitor"
@@ -82,7 +82,7 @@ if __name__ == "__main__":
                     timestamp = now.strftime("%Y%m%dT%H%M")
                     dest = Path(f"./{timestamp}.hdf5")
                 mon.save(dest)
-                exit(0)
+                return 0
 
     elif args.cmd == "plot":
         from ._plot import App
@@ -91,4 +91,8 @@ if __name__ == "__main__":
         with h5py.File(args.input_file, "r") as data:
             app = App(data)
             app.run(debug=True, host=args.host)
-        exit(0)
+        return 0
+
+
+if __name__ == "__main__":
+    exit(main())
