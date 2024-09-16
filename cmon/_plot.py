@@ -1,4 +1,6 @@
-from dash import Dash, dcc
+from dash import Dash
+from dash import dcc
+
 
 class App:
     def __init__(self, hdf5_fp):

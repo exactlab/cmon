@@ -1,22 +1,28 @@
+from argparse import ArgumentParser
+from datetime import datetime
+from pathlib import Path
+from time import sleep
+
 from ._docker import ComposeContainers
 from ._monitor import Monitor
-from time import sleep
-from argparse import ArgumentParser
-from pathlib import Path
-from datetime import datetime
 
 
 parser = ArgumentParser(
     prog="cmon",
     description="""The container monitor
 
-Collect metrics on CPU, memory, context switches and number of threads 
+Collect metrics on CPU, memory, context switches and number of threads
 for running containers, optionally filtering by Docker Compose project.
 """,
 )
 subpparser = parser.add_subparsers(title="Commands", dest="cmd")
 parser_plot = subpparser.add_parser("plot", help="Plot metrics")
 parser_plot.add_argument("input_file", help="Path to HDF5 input file")
+parser_plot.add_argument(
+    "--host",
+    help="Host on which to bind the Dash dashboard",
+    default="127.0.0.1",
+)
 
 parser_monitor = subpparser.add_parser(
     "monitor", help="Record metrics [default behaviour]"
@@ -74,7 +80,7 @@ if __name__ == "__main__":
                 except TypeError:
                     now = datetime.now()
                     timestamp = now.strftime("%Y%m%dT%H%M")
-                    dest = Path( f"./{timestamp}.hdf5")
+                    dest = Path(f"./{timestamp}.hdf5")
                 mon.save(dest)
                 exit(0)
 
@@ -84,5 +90,5 @@ if __name__ == "__main__":
 
         with h5py.File(args.input_file, "r") as data:
             app = App(data)
-            app.run(debug=True, host="0.0.0.0")
+            app.run(debug=True, host=args.host)
         exit(0)

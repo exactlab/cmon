@@ -1,7 +1,8 @@
-from psutil import Process
-import numpy as np
 from time import perf_counter_ns
+
 import h5py
+import numpy as np
+from psutil import Process
 
 
 class ProcessMonitor:
@@ -61,7 +62,7 @@ class ProcessMonitor:
         return out
 
     def crop_buffer(self):
-        self.buffers[-1] = self.buffers[-1][:self.idx]
+        self.buffers[-1] = self.buffers[-1][: self.idx]
 
     def save(self, hdf5_fp):
         self.crop_buffer()
