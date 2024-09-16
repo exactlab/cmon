@@ -1,0 +1,11 @@
+__pycache__
+.env
+.coverage
+dist/
+venv/
+.egg-info
+requirements.txt
+makefile
+*.nc
+*.hdf5
+*.grib
