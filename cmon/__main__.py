@@ -1,19 +1,13 @@
 from argparse import ArgumentParser
-from datetime import datetime
-from pathlib import Path
-from time import sleep
-
-from ._docker import ComposeContainers
-from ._monitor import Monitor
 
 
 parser = ArgumentParser(
     prog="cmon",
-    description="""The container monitor
-
+    description="""\
 Collect metrics on CPU, memory, context switches and number of threads
-for running containers, optionally filtering by Docker Compose project.
+from running containers, optionally filtering by Docker Compose project.
 """,
+    epilog="Copyright (C) 2024 eXact lab S.r.l. <https://exact-lab.it>\n",
 )
 subpparser = parser.add_subparsers(title="Commands", dest="cmd")
 parser_plot = subpparser.add_parser("plot", help="Plot metrics")
@@ -64,8 +58,15 @@ def main():
         args.cmd = "monitor"
 
     if args.cmd == "monitor":
+        from ._monitor import Monitor
+        from datetime import datetime
+        from pathlib import Path
+        from time import sleep
+
         process_map = {}
         if not args.no_docker:
+            from ._docker import ComposeContainers
+
             cc = ComposeContainers(compose_project=args.compose)
             process_map.update(cc.process_map)
 
