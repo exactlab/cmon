@@ -3,6 +3,21 @@
 `cmon` collects metrics on running containers and saves them to an HDF5
 file.
 
+## Installation
+
+Clone this repository and run `poetry install`. Afterwards you will be able to
+invoke `cmon` as `poetry run cmon`.
+
+You may alternatively build a Python wheel for `cmon` and install it system
+wide as follows, assuming you are in the repository root:
+
+```bash
+poetry build
+pip install dist/cmon-0.1.0-py3-none-any.whl
+```
+
+From then on you should have `cmon` available in your path.
+
 ## Collection
 
 ```
